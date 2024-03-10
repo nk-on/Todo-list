@@ -25,6 +25,10 @@ header {
   color: var(--primary-light)
 }
 
+main {
+  display: flex;
+}
+
 aside {
   padding-top: 10%;
   display: flex;
@@ -35,13 +39,22 @@ aside {
   width: 20vw;
 }
 
-aside .Add-project {
+button {
   background-color: var(--secondary-light);
   border: none;
   padding: 10px 30px;
   cursor: pointer;
 }
 
-.Add-project:hover {
+button:hover {
   background-color: var(--primary-light);
+}
+
+.dashboard {
+  margin-top: 30vh;
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
