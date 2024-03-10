@@ -12,12 +12,36 @@
   padding: 0;
   margin: 0;
 }
-body{
+
+body {
   font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
 }
+
 header {
   padding: 15px 20px;
   height: 10vh;
   background-color: var(--primary-dark);
-  color:var(--primary-light)
+  color: var(--primary-light)
+}
+
+aside {
+  padding-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-light);
+  height: 100vh;
+  width: 20vw;
+}
+
+aside .Add-project {
+  background-color: var(--secondary-light);
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+.Add-project:hover {
+  background-color: var(--primary-light);
 }
