@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo list</title>
-    <link rel="stylesheet" href="src/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="src/style.css" />
+    <script type="module" src="src/main.js" defer></script>
+  </head>
+  <body>
     <header>
-        <h1>Todo-List</h1>
+      <h1>Todo-List</h1>
     </header>
-     <main>
-        <aside>
-            <button class = "Add-project">+ Add project</button>
-        </aside>
-        <section class="dashboard">
-            <button class="Create-task">+Create task</button>
-        </section>
-     </main>
-</body>
+    <main>
+      <aside>
+        <button class="Create-project">+ Add project</button>
+        <dialog class="Create-project-dialog">
+            <form>
+            <span class = "close-project-dialog">&#10005</span>
+              <label for="name">Project description:</label>
+              <input type="text" id="name" name="name" required />
+            </form>
+          </dialog>
+      </aside>
+      <section class="dashboard">
+        <button class="Create-task">+Create task</button>
+        <dialog class="Create-task-dialog">
+          <form>
+            <span class = "close-task-dialog">&#10005</span>
+            <label for="name">Task description:</label>
+            <input type="text" id="name" name="name" required />
+            <label for="message">Due date:</label>
+            <input type="date" id="name" name="name" required />
+            <button type="submit">Submit</button>
+          </form>
+        </dialog>
+      </section>
+    </main>
+  </body>
 </html>
