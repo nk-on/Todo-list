@@ -26,7 +26,6 @@ function markClickedProject(projectBoxes) {
     projectBoxes.forEach((projectBox, index) => {
       projectBox.addEventListener('click', () => {
         projectArray[index].clicked = true;
-        console.log(projectArray[index]);
       });
     });
   }
@@ -39,9 +38,9 @@ function createProjectBox() {
       <button class="delete-button">Delete</button>
     </div>
     `;
+  projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   const projectBoxes = document.querySelectorAll('.project');
   markClickedProject(projectBoxes);
-  projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   closeCreateProjectDialog();
 }
 createTaskButton.addEventListener('click', showCreateTaskDialog);
