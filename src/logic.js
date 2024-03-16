@@ -1,6 +1,6 @@
 const taskDescriptionInput = document.querySelector('#task-description');
 const dueDateInput = document.querySelector('#date');
-const projectDescriptionInput = document.querySelector('#project-description')
+const projectDescriptionInput = document.querySelector('#project-description');
 const submitProjectButton = document.querySelector('.add-project');
 const tasks = [];
 const projectArray = [];
@@ -15,4 +15,8 @@ function createProject() {
   projectArray.push(project);
   return project;
 }
-export { createProject, submitProjectButton, projectArray };
+export {
+  createProject,
+  submitProjectButton,
+  projectArray,
+};
