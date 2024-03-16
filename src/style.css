@@ -39,6 +39,31 @@ aside {
   width: 20vw;
 }
 
+.project {
+  cursor: pointer;
+  background-color: var(--primary-light);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-description {
+  margin-bottom: 10px;
+}
+
+.delete-button {
+  background-color: var(--secondary-dark);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: var(--primary-dark);
+}
 button {
   background-color: var(--secondary-light);
   border: none;
@@ -60,13 +85,13 @@ button:hover {
 }
 dialog {
   position: fixed;
-  top:50vh;
+  top: 50vh;
   margin: 0 auto;
 }
 form {
   display: flex;
   flex-direction: column;
-  gap:10px;
+  gap: 10px;
   padding: 10px;
 }
 span {
