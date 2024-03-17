@@ -1,14 +1,25 @@
 /* eslint-disable no-param-reassign */
-import { createProject, projectArray, submitProjectButton } from './logic.js';
+import {
+  createTask,
+  createProject,
+  projectArray,
+  submitProjectButton,
+  taskArray,
+  getClickedProject,
+} from './logic.js';
 
 const homeButton = document.querySelector('.Home');
 const createTaskDialog = document.querySelector('.Create-task-dialog');
+const submitTaskButton = document.querySelector('.add-task');
 const createTaskButton = document.querySelector('.Create-task');
 const createProjectDialog = document.querySelector('.Create-project-dialog');
 const createProjectButton = document.querySelector('.Create-project');
 const closeTaskDialogButton = document.querySelector('.close-task-dialog');
 const projectContainer = document.querySelector('.project-container');
-const closeProjectDialogButton = document.querySelector('.close-project-dialog');
+const taskContainer = document.querySelector('.task-container');
+const closeProjectDialogButton = document.querySelector(
+  '.close-project-dialog'
+);
 function showCreateTaskDialog() {
   createTaskDialog.showModal();
 }
@@ -43,8 +54,29 @@ function markClickedProject(projectBoxes) {
         removeClicked(index);
       });
     });
-  };
-
+  }
+}
+function renderTasks(tasks) {
+  if (taskContainer.innerHTML.length > 0) {
+    taskContainer.innerHTML = '';
+  }
+  tasks.forEach((task) => {
+    const taskHTML = `
+  <div class="task">
+    <p class = "task-description">${task.taskDescription}</p>
+    <p class = "due-date">${task.dueDate}</p>
+    <button class="action-button delete-button">Delete</button>
+    <button class="action-button edit-button">Edit</button>
+  </div>`;
+    taskContainer.insertAdjacentHTML('beforeend', taskHTML);
+  });
+}
+function createTaskBoxes(event) {
+  event.preventDefault();
+  const clickedProject = getClickedProject();
+  const createdTaskArray = createTask();
+  renderTasks(createdTaskArray);
+  closeCreateTaskDialog();
 }
 function createProjectBox() {
   const projectInstance = createProject();
@@ -57,11 +89,15 @@ function createProjectBox() {
   projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   const projectBoxes = document.querySelectorAll('.project');
   markClickedProject(projectBoxes);
+  projectBoxes.forEach((projectBox) => {
+    projectBox.addEventListener('click', createTaskBoxes);
+  });
   closeCreateProjectDialog();
 }
-createTaskButton.addEventListener('click', showCreateTaskDialog);
 closeTaskDialogButton.addEventListener('click', closeCreateTaskDialog);
 createProjectButton.addEventListener('click', showCreateProjectDialog);
 closeProjectDialogButton.addEventListener('click', closeCreateProjectDialog);
 submitProjectButton.addEventListener('click', createProjectBox);
 homeButton.addEventListener('click', removeAllClicked);
+submitTaskButton.addEventListener('click', createTaskBoxes);
+createTaskButton.addEventListener('click', showCreateTaskDialog);
