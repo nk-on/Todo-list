@@ -76,6 +76,16 @@ function createTaskBoxes(event) {
   renderTasks(createdTaskArray);
   closeCreateTaskDialog();
 }
+function deleteElement() {
+  const elementToDelete = this.parentNode;
+  const containerDiv = this.parentNode.parentNode;
+  if (elementToDelete.classList.contains('project')) {
+    const containerDivArr = Array.from(containerDiv.children);
+    const index = containerDivArr.indexOf(elementToDelete);
+    projectArray.splice(index, index);
+  }
+  containerDiv.removeChild(elementToDelete);
+}
 function createProjectBox() {
   const projectInstance = createProject();
   const projectHTML = `
@@ -86,6 +96,11 @@ function createProjectBox() {
     `;
   projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   const projectBoxes = document.querySelectorAll('.project');
+  const deleteButtons = document.querySelectorAll('.delete-button');
+  console.log(deleteButtons);
+  deleteButtons.forEach((deleteButton) => {
+    deleteButton.addEventListener('click', deleteElement);
+  });
   markClickedProject(projectBoxes);
   projectBoxes.forEach((projectBox, index) => {
     projectBox.addEventListener('click', () => {
