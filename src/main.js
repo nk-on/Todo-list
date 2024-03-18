@@ -5,7 +5,6 @@ import {
   projectArray,
   submitProjectButton,
   taskArray,
-  getClickedProject,
 } from './logic.js';
 
 const homeButton = document.querySelector('.Home');
@@ -95,6 +94,9 @@ function createProjectBox() {
   });
   closeCreateProjectDialog();
 }
+homeButton.addEventListener('click', () => {
+  renderTasks(taskArray);
+});
 closeTaskDialogButton.addEventListener('click', closeCreateTaskDialog);
 createProjectButton.addEventListener('click', showCreateProjectDialog);
 closeProjectDialogButton.addEventListener('click', closeCreateProjectDialog);

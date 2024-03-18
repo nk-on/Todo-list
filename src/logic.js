@@ -47,5 +47,4 @@ export {
   submitProjectButton,
   projectArray,
   taskArray,
-  getClickedProject,
 };
