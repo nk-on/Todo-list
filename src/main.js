@@ -55,6 +55,17 @@ function markClickedProject(projectBoxes) {
     });
   }
 }
+function deleteElement() {
+  const elementToDelete = this.parentNode;
+  const containerDiv = this.parentNode.parentNode;
+  if (elementToDelete.classList.contains('project')) {
+    const containerDivArr = Array.from(containerDiv.children);
+    const index = containerDivArr.indexOf(elementToDelete);
+    projectArray.splice(index, index);
+  }
+  console.log(getC)
+  containerDiv.removeChild(elementToDelete);
+}
 function renderTasks(tasks) {
   if (taskContainer.innerHTML.length > 0) {
     taskContainer.innerHTML = '';
@@ -69,22 +80,16 @@ function renderTasks(tasks) {
   </div>`;
     taskContainer.insertAdjacentHTML('beforeend', taskHTML);
   });
+  const deleteButtons = document.querySelectorAll('.delete-button');
+  deleteButtons.forEach((deleteButton) => {
+    deleteButton.addEventListener('click', deleteElement);
+  });
 }
 function createTaskBoxes(event) {
   event.preventDefault();
   const createdTaskArray = createTask();
   renderTasks(createdTaskArray);
   closeCreateTaskDialog();
-}
-function deleteElement() {
-  const elementToDelete = this.parentNode;
-  const containerDiv = this.parentNode.parentNode;
-  if (elementToDelete.classList.contains('project')) {
-    const containerDivArr = Array.from(containerDiv.children);
-    const index = containerDivArr.indexOf(elementToDelete);
-    projectArray.splice(index, index);
-  }
-  containerDiv.removeChild(elementToDelete);
 }
 function createProjectBox() {
   const projectInstance = createProject();
@@ -97,7 +102,6 @@ function createProjectBox() {
   projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   const projectBoxes = document.querySelectorAll('.project');
   const deleteButtons = document.querySelectorAll('.delete-button');
-  console.log(deleteButtons);
   deleteButtons.forEach((deleteButton) => {
     deleteButton.addEventListener('click', deleteElement);
   });
@@ -110,6 +114,7 @@ function createProjectBox() {
   closeCreateProjectDialog();
 }
 homeButton.addEventListener('click', () => {
+  removeAllClicked();
   renderTasks(taskArray);
 });
 closeTaskDialogButton.addEventListener('click', closeCreateTaskDialog);
