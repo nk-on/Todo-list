@@ -73,7 +73,6 @@ function renderTasks(tasks) {
 }
 function createTaskBoxes(event) {
   event.preventDefault();
-  const clickedProject = getClickedProject();
   const createdTaskArray = createTask();
   renderTasks(createdTaskArray);
   closeCreateTaskDialog();
@@ -89,8 +88,10 @@ function createProjectBox() {
   projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   const projectBoxes = document.querySelectorAll('.project');
   markClickedProject(projectBoxes);
-  projectBoxes.forEach((projectBox) => {
-    projectBox.addEventListener('click', createTaskBoxes);
+  projectBoxes.forEach((projectBox, index) => {
+    projectBox.addEventListener('click', () => {
+      renderTasks(projectArray[index].tasks);
+    });
   });
   closeCreateProjectDialog();
 }
