@@ -5,6 +5,7 @@ import {
   projectArray,
   submitProjectButton,
   taskArray,
+  getClickedProject,
 } from './logic.js';
 
 const homeButton = document.querySelector('.Home');
@@ -65,28 +66,45 @@ function deleteProject(project) {
     containerDiv.removeChild(project);
   }
 }
+function deleteTask(taskBox) {
+  const clickedProject = getClickedProject();
+  const containerDiv = taskBox.parentNode;
+  const containerDivArr = Array.from(containerDiv.children);
+  const indexOfTaskBox = containerDivArr.indexOf(taskBox);
+  if (clickedProject) {
+    const projectTasks = clickedProject.tasks;
+    projectTasks.splice(indexOfTaskBox, indexOfTaskBox);
+  } else {
+    taskArray.splice(indexOfTaskBox, indexOfTaskBox);
+  }
+  containerDiv.removeChild(taskBox);
+}
 function renderTasks(tasks) {
   if (taskContainer.innerHTML.length > 0) {
     taskContainer.innerHTML = '';
   }
-  tasks.forEach((task) => {
-    const taskHTML = `
-  <div class="task">
-    <p class = "task-description">${task.taskDescription}</p>
-    <p class = "due-date">${task.dueDate}</p>
-    <button class="action-button delete-button">Delete</button>
-    <button class="action-button edit-button">Edit</button>
-  </div>`;
-    taskContainer.insertAdjacentHTML('beforeend', taskHTML);
-  });
-  const deleteButtons = document.querySelectorAll('.delete-button');
-  // deleteButtons.forEach((deleteButton) => {
-  //   deleteButton.addEventListener('click', (event) => {
-  //     deleteButton();
-  //     event.stopPropagation();
-  //   });
-  // });
+  if (tasks.length > 0) {
+    tasks.forEach((task) => {
+      const taskHTML = `
+    <div class="task">
+      <p class = "task-description">${task.taskDescription}</p>
+      <p class = "due-date">${task.dueDate}</p>
+      <button class="delete-task-button">Delete</button>
+      <button class="edit-button">Edit</button>
+    </div>`;
+      taskContainer.insertAdjacentHTML('beforeend', taskHTML);
+    });
+    const taskBoxes = document.querySelectorAll('.task');
+    const deleteButtons = document.querySelectorAll('.delete-task-button');
+    deleteButtons.forEach((deleteButton, index) => {
+      deleteButton.addEventListener('click', (event) => {
+        deleteTask(taskBoxes[index]);
+        event.stopPropagation();
+      });
+    });
+  }
 }
+
 function createTaskBoxes(event) {
   event.preventDefault();
   const createdTaskArray = createTask();
@@ -98,12 +116,12 @@ function createProjectBox() {
   const projectHTML = `
     <div class="project">
       <p class="project-description">${projectInstance.projectDescription}</p>
-      <button class="delete-button">Delete</button>
+      <button class="delete-project-button">Delete</button>
     </div>
     `;
   projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   const projectBoxes = document.querySelectorAll('.project');
-  const deleteButtons = document.querySelectorAll('.delete-button');
+  const deleteButtons = document.querySelectorAll('.delete-project-button');
   deleteButtons.forEach((deleteButton, index) => {
     deleteButton.addEventListener('click', (event) => {
       deleteProject(projectBoxes[index]);
