@@ -55,16 +55,15 @@ function markClickedProject(projectBoxes) {
     });
   }
 }
-function deleteElement() {
-  const elementToDelete = this.parentNode;
-  const containerDiv = this.parentNode.parentNode;
-  if (elementToDelete.classList.contains('project')) {
+function deleteProject(project) {
+  const containerDiv = project.parentNode;
+  if (containerDiv) {
     const containerDivArr = Array.from(containerDiv.children);
-    const index = containerDivArr.indexOf(elementToDelete);
+    const index = containerDivArr.indexOf(project);
     projectArray.splice(index, index);
+    taskContainer.innerHTML = '';
+    containerDiv.removeChild(project);
   }
-  console.log(getC)
-  containerDiv.removeChild(elementToDelete);
 }
 function renderTasks(tasks) {
   if (taskContainer.innerHTML.length > 0) {
@@ -81,9 +80,12 @@ function renderTasks(tasks) {
     taskContainer.insertAdjacentHTML('beforeend', taskHTML);
   });
   const deleteButtons = document.querySelectorAll('.delete-button');
-  deleteButtons.forEach((deleteButton) => {
-    deleteButton.addEventListener('click', deleteElement);
-  });
+  // deleteButtons.forEach((deleteButton) => {
+  //   deleteButton.addEventListener('click', (event) => {
+  //     deleteButton();
+  //     event.stopPropagation();
+  //   });
+  // });
 }
 function createTaskBoxes(event) {
   event.preventDefault();
@@ -102,8 +104,11 @@ function createProjectBox() {
   projectContainer.insertAdjacentHTML('beforeend', projectHTML);
   const projectBoxes = document.querySelectorAll('.project');
   const deleteButtons = document.querySelectorAll('.delete-button');
-  deleteButtons.forEach((deleteButton) => {
-    deleteButton.addEventListener('click', deleteElement);
+  deleteButtons.forEach((deleteButton, index) => {
+    deleteButton.addEventListener('click', (event) => {
+      deleteProject(projectBoxes[index]);
+      event.stopPropagation();
+    });
   });
   markClickedProject(projectBoxes);
   projectBoxes.forEach((projectBox, index) => {
