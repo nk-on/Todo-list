@@ -62,23 +62,40 @@ function deleteProject(project) {
     const containerDivArr = Array.from(containerDiv.children);
     const index = containerDivArr.indexOf(project);
     projectArray.splice(index, index);
+    console.log(projectArray);
     taskContainer.innerHTML = '';
     containerDiv.removeChild(project);
   }
 }
-function deleteTask(taskBox) {
+function deleteTask(taskBox, index) {
   const clickedProject = getClickedProject();
   const containerDiv = taskBox.parentNode;
-  const containerDivArr = Array.from(containerDiv.children);
-  const indexOfTaskBox = containerDivArr.indexOf(taskBox);
   if (clickedProject) {
     const projectTasks = clickedProject.tasks;
-    projectTasks.splice(indexOfTaskBox, indexOfTaskBox);
+    projectTasks.splice(index, index);
   } else {
-    taskArray.splice(indexOfTaskBox, indexOfTaskBox);
+    taskArray.splice(index, index);
+  }
+  taskArray.pop();
+  if (clickedProject) {
+    const projectTasks = clickedProject.tasks;
+    projectTasks.pop();
   }
   containerDiv.removeChild(taskBox);
 }
+// function editTask(taskBox) {
+//   //find parent element of clicked edit button
+//   //replace task description and due date with forms
+//   //change their content
+//   //change content of created task object
+//   const taskDescription = document.querySelector('.task-description');
+//   const dueDate = document.querySelector('.due-date');
+//   taskDescription.contentEditable = true;
+//   dueDate.contentEditable = true;
+//   return () => {
+//     console.log(taskDescription.textContent)
+//   };
+// }
 function renderTasks(tasks) {
   if (taskContainer.innerHTML.length > 0) {
     taskContainer.innerHTML = '';
@@ -96,12 +113,19 @@ function renderTasks(tasks) {
     });
     const taskBoxes = document.querySelectorAll('.task');
     const deleteButtons = document.querySelectorAll('.delete-task-button');
+    const editButtons = document.querySelectorAll('.edit-button');
     deleteButtons.forEach((deleteButton, index) => {
       deleteButton.addEventListener('click', (event) => {
-        deleteTask(taskBoxes[index]);
+        deleteTask(taskBoxes[index], index);
         event.stopPropagation();
       });
     });
+    // editButtons.forEach((editButton, index) => {
+    //   editButton.addEventListener('click', (event) => {
+    //     editTask(taskBoxes[index]);
+    //     event.stopPropagation();
+    //   });
+    // });
   }
 }
 
