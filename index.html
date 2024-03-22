@@ -37,6 +37,16 @@
             <button class = "add-task">Add task</button>
           </form>
         </dialog>
+        <dialog class = "update-task-dialog">
+          <form>
+            <span class = "close-update-task-dialog">&#10005</span>
+            <label for="name">Task description:</label>
+            <input type="text" id="updated-task-description" name="name" required />
+            <label for="message">Due date:</label>
+            <input type="date" id="updated-date" name="name" required />
+            <button class = "update-task">Update task</button>
+          </form>
+        </dialog>
         <div class="task-container"></div>
       </section>
     </main>

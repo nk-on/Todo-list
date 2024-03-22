@@ -17,9 +17,18 @@ const createProjectButton = document.querySelector('.Create-project');
 const closeTaskDialogButton = document.querySelector('.close-task-dialog');
 const projectContainer = document.querySelector('.project-container');
 const taskContainer = document.querySelector('.task-container');
+const updatedTaskDescription = document.querySelector(
+  '#updated-task-description'
+);
+const updatedDate = document.querySelector('#updated-date');
 const closeProjectDialogButton = document.querySelector(
   '.close-project-dialog'
 );
+const updateTask = document.querySelector('.update-task');
+const updateTaskCloseButton = document.querySelector(
+  '.close-update-task-dialog'
+);
+const updateTaskDialog = document.querySelector('.update-task-dialog');
 function showCreateTaskDialog() {
   createTaskDialog.showModal();
 }
@@ -31,6 +40,12 @@ function showCreateProjectDialog() {
 }
 function closeCreateProjectDialog() {
   createProjectDialog.close();
+}
+function showUpdateTaskDialog() {
+  updateTaskDialog.showModal();
+}
+function closeUpdateTaskDialog() {
+  updateTaskDialog.close();
 }
 function removeAllClicked() {
   projectArray.forEach((project) => {
@@ -76,26 +91,36 @@ function deleteTask(taskBox, index) {
   } else {
     taskArray.splice(index, index);
   }
-  taskArray.pop();
   if (clickedProject) {
     const projectTasks = clickedProject.tasks;
     projectTasks.pop();
+    return;
   }
+  taskArray.pop();
   containerDiv.removeChild(taskBox);
 }
-// function editTask(taskBox) {
-//   //find parent element of clicked edit button
-//   //replace task description and due date with forms
-//   //change their content
-//   //change content of created task object
-//   const taskDescription = document.querySelector('.task-description');
-//   const dueDate = document.querySelector('.due-date');
-//   taskDescription.contentEditable = true;
-//   dueDate.contentEditable = true;
-//   return () => {
-//     console.log(taskDescription.textContent)
-//   };
-// }
+function editTask(index) {
+  showUpdateTaskDialog();
+  const taskDescriptionContainer = document.querySelector('.task-description');
+  const dueDateContainer = document.querySelector('.due-date');
+  updateTask.addEventListener('click', (event) => {
+    event.preventDefault();
+    const taskDescription = updatedTaskDescription.value;
+    const dueDate = updatedDate.value;
+    taskDescriptionContainer.textContent = taskDescription;
+    dueDateContainer.textContent = dueDate;
+    const clickedProject = getClickedProject();
+    let currentTasks;
+    if (clickedProject) {
+      currentTasks = clickedProject.tasks[index];
+    } else {
+      currentTasks = taskArray;
+    }
+    currentTasks.taskDescription = taskDescription;
+    currentTasks.dueDate = dueDate;
+    closeUpdateTaskDialog();
+  });
+}
 function renderTasks(tasks) {
   if (taskContainer.innerHTML.length > 0) {
     taskContainer.innerHTML = '';
@@ -120,12 +145,12 @@ function renderTasks(tasks) {
         event.stopPropagation();
       });
     });
-    // editButtons.forEach((editButton, index) => {
-    //   editButton.addEventListener('click', (event) => {
-    //     editTask(taskBoxes[index]);
-    //     event.stopPropagation();
-    //   });
-    // });
+    editButtons.forEach((editButton, index) => {
+      editButton.addEventListener('click', (event) => {
+        editTask(index);
+        event.stopPropagation();
+      });
+    });
   }
 }
 
@@ -164,6 +189,7 @@ homeButton.addEventListener('click', () => {
   removeAllClicked();
   renderTasks(taskArray);
 });
+updateTaskCloseButton.addEventListener('click', closeUpdateTaskDialog);
 closeTaskDialogButton.addEventListener('click', closeCreateTaskDialog);
 createProjectButton.addEventListener('click', showCreateProjectDialog);
 closeProjectDialogButton.addEventListener('click', closeCreateProjectDialog);
