@@ -12,13 +12,15 @@
       <h1>Todo-List</h1>
     </header>
     <main>
-      <aside>
-        <button class="Create-project">+ Add project</button>
+      <aside data-project-container>
+        <button>Home</button>
+        <button class="Create-project" data-create-project>+ Add project</button>
         <dialog class="Create-project-dialog">
-            <form>
+            <form data-project-form>
             <span class = "close-project-dialog">&#10005</span>
               <label for="name">Project description:</label>
               <input type="text" id="project-description" name="name" required />
+              <button data-submit-project type="submit">Submit Project</button>
             </form>
           </dialog>
       </aside>
@@ -35,6 +37,12 @@
           </form>
         </dialog>
       </section>
+      <template id="project">
+        <div id="project">
+          <h2 data-title></h2>
+          <button>Delete</button>
+        </div>
+      </template>
     </main>
   </body>
 </html>
