@@ -6,6 +6,7 @@
     <title>Todo list</title>
     <link rel="stylesheet" href="src/style.css" />
     <script type="module" src="src/main.js" defer></script>
+    <script type="module" src="src/UI.js"></script>
   </head>
   <body>
     <header>
@@ -16,7 +17,7 @@
         <button>Home</button>
         <div class="buttons">
           <button class="Create-project" data-create-project>+ Add project</button>
-          <button class="edit-button">Edit project</button>
+          <button class="edit-button" data-edit-project>Edit project</button>
           <button class="delete-project" data-delete-project>Delete project</button>
         </div>
         <dialog class="Create-project-dialog">
@@ -26,7 +27,15 @@
               <input type="text" id="project-description" name="name" required />
               <button data-submit-project type="submit">Submit Project</button>
             </form>
-          </dialog>
+        </dialog>
+        <dialog class="edit-project-dialog">
+          <form data-edit-project-form>
+            <span class = "close-edit-project-dialog">&#10005</span>
+            <label for="name">Project description:</label>
+            <input type="text" id="edited-project-description" name="name" required />
+            <button data-submit-editedProject type="submit">Edit Project</button>
+          </form>
+      </dialog>
          <section data-project-container></section>
       </aside>
       <section class="dashboard">

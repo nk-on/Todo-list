@@ -1,33 +1,13 @@
 import { createProject } from './logic.js';
 
-const createTaskDialog = document.querySelector('.Create-task-dialog');
-const createTaskButton = document.querySelector('.Create-task');
-const createProjectDialog = document.querySelector('.Create-project-dialog');
-const createProjectButton = document.querySelector('.Create-project');
-const closeTaskDialogButton = document.querySelector('.close-task-dialog');
-const closeProjectDialogButton = document.querySelector(
-  '.close-project-dialog'
-);
-const addProjectButton = document.querySelector('[data-create-project]');
-const submitProjectButton = document.querySelector('[data-submit-project]');
 const deleteProjectButton = document.querySelector('[data-delete-project]');
+const submitEditProject = document.querySelector('[data-submit-editedProject]');
 const projectForm = document.querySelector('[data-project-form]');
 const templateProject = document.querySelector('#project');
 const projectContainer = document.querySelector('[data-project-container]');
+const editProjectInput = document.querySelector('#edited-project-description');
 let projectArray = JSON.parse(localStorage.getItem('projects')) || [];
 let selectedProject;
-function showCreateTaskDialog() {
-  createTaskDialog.showModal();
-}
-function closeCreateTaskDialog() {
-  createTaskDialog.close();
-}
-function showCreateProjectDialog() {
-  createProjectDialog.showModal();
-}
-function closeCreateProjectDialog() {
-  createProjectDialog.close();
-}
 function saveProject() {
   localStorage.setItem('projects', JSON.stringify(projectArray));
 }
@@ -55,11 +35,29 @@ function createProjectBoxes() {
     });
   });
 }
+function editProject(event) {
+  event.preventDefault();
+  if (!selectedProject) {
+    return;
+  }
+  projectArray.forEach((project) => {
+    if (project.id === selectedProject.id) {
+      // eslint-disable-next-line no-param-reassign
+      console.log(editProjectInput.value);
+      project.title = editProjectInput.value;
+    }
+  });
+  console.log(projectArray);
+  saveProject();
+  createProjectBoxes();
+}
 function deleteProject() {
   if (!selectedProject) {
     return;
   }
-  projectArray = projectArray.filter((project) => selectedProject.id !== project.id);
+  projectArray = projectArray.filter(
+    (project) => selectedProject.id !== project.id
+  );
   saveProject();
   createProjectBoxes();
 }
@@ -72,9 +70,6 @@ projectForm.addEventListener('submit', (event) => {
   event.preventDefault();
   renderProjects();
 });
-createTaskButton.addEventListener('click', showCreateTaskDialog);
-closeTaskDialogButton.addEventListener('click', closeCreateTaskDialog);
-createProjectButton.addEventListener('click', showCreateProjectDialog);
-closeProjectDialogButton.addEventListener('click', closeCreateProjectDialog);
-deleteProjectButton.addEventListener('click', deleteProject)
+deleteProjectButton.addEventListener('click', deleteProject);
+submitEditProject.addEventListener('click', editProject);
 createProjectBoxes();
