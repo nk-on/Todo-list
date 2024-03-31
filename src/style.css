@@ -36,7 +36,7 @@ aside {
   align-items: center;
   background-color: var(--secondary-light);
   height: 100vh;
-  width: 20vw;
+  min-width: 20vw;
 }
 
 button {
@@ -97,11 +97,11 @@ span {
   transition: background-color 0.3s ease;
 }
 
-#project button:hover {
+#projectBox button:hover {
   background-color: var(--secondary-dark);
   color: var(--secondary-light);
 }
-#project {
+#projectBox {
   background-color: var(--primary-light);
   color: var(--primary-dark);
   padding: 20px;
@@ -111,13 +111,13 @@ span {
   cursor: pointer;
 }
 
-#project h2 {
+#projectBox h2 {
   margin-top: 0;
   margin-bottom: 10px;
   font-size: 24px;
 }
 
-#project button {
+#projectBox button {
   background-color: var(--secondary-light);
   color: var(--secondary-dark);
   border: none;
@@ -127,13 +127,11 @@ span {
   transition: background-color 0.3s ease;
 }
 
-#project button:hover {
+#projectBox button:hover {
   background-color: var(--secondary-dark);
   color: var(--secondary-light);
 }
-#project:hover {
+#selected {
   background-color: var(--secondary-dark);
-}
-#project:hover > h2{
   color: var(--primary-light);
 }

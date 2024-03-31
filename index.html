@@ -12,9 +12,13 @@
       <h1>Todo-List</h1>
     </header>
     <main>
-      <aside data-project-container>
+      <aside>
         <button>Home</button>
-        <button class="Create-project" data-create-project>+ Add project</button>
+        <div class="buttons">
+          <button class="Create-project" data-create-project>+ Add project</button>
+          <button class="edit-button">Edit project</button>
+          <button class="delete-project" data-delete-project>Delete project</button>
+        </div>
         <dialog class="Create-project-dialog">
             <form data-project-form>
             <span class = "close-project-dialog">&#10005</span>
@@ -23,6 +27,7 @@
               <button data-submit-project type="submit">Submit Project</button>
             </form>
           </dialog>
+         <section data-project-container></section>
       </aside>
       <section class="dashboard">
         <button class="Create-task">+Create task</button>
@@ -38,9 +43,8 @@
         </dialog>
       </section>
       <template id="project">
-        <div id="project">
+        <div id = "projectBox"data-project-box>
           <h2 data-title></h2>
-          <button>Delete</button>
         </div>
       </template>
     </main>
