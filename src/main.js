@@ -59,7 +59,7 @@ function deleteProject() {
   if (!selectedProject) {
     return;
   }
-  projectArray = projectArray.filter((project) => selectedProject.id === project.id);
+  projectArray = projectArray.filter((project) => selectedProject.id !== project.id);
   saveProject();
   createProjectBoxes();
 }

@@ -8,6 +8,6 @@ class Project {
 }
 function createProject() {
   const projectInstance = new Project(projectInput.value, Date.now());
-  return projectInstance();
+  return projectInstance;
 }
 export  { createProject };
