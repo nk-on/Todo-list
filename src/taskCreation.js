@@ -2,6 +2,7 @@ import {
   projectArray,
   selectedProject,
   saveProject,
+  projectContainer,
 } from './projectCreation.js';
 //app should be able to dsiplay tasks from default task array
 //when user clicks on specific selected project it should display its subtasks
@@ -12,8 +13,8 @@ const taskTemplate = document.querySelector('#task');
 const taskContainer = document.querySelector('[data-task-container]');
 const homeButton = document.querySelector('[data-home-button] ');
 const taskArray = JSON.parse(localStorage.getItem('tasks')) || [];
-function saveTasks(){
-    localStorage.setItem('tasks',JSON.stringify(taskArray));
+function saveTasks() {
+  localStorage.setItem('tasks', JSON.stringify(taskArray));
 }
 function renderTaskArray(tasks) {
   if (taskContainer.innerHTML.length) {
@@ -29,7 +30,7 @@ function renderTaskArray(tasks) {
     taskContainer.appendChild(taskElement);
     taskDiv.classList.add(String(task.id));
   });
-};
+}
 function createTaskArray() {
   const task = createTask();
   if (selectedProject) {
@@ -42,11 +43,19 @@ function createTaskArray() {
   saveTasks();
   renderTaskArray(taskArray);
 }
+console.log(projectContainer.children);
+projectContainer.childNodes.forEach((project) => {
+  project.addEventListener('click', () => {
+    if (String(selectedProject.id) === project.className) {
+      renderTaskArray(selectedProject.tasks);
+    }
+  });
+});
 addTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   createTaskArray();
 });
 homeButton.addEventListener('click', () => {
-    renderTaskArray(taskArray);
+  renderTaskArray(taskArray);
 });
 renderTaskArray(taskArray);
