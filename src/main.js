@@ -73,3 +73,4 @@ projectForm.addEventListener('submit', (event) => {
 deleteProjectButton.addEventListener('click', deleteProject);
 submitEditProject.addEventListener('click', editProject);
 createProjectBoxes();
+export {selectedProject,saveProject,projectArray}
