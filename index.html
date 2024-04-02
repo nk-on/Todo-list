@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo list</title>
     <link rel="stylesheet" href="src/style.css" />
-    <script type="module" src="src/main.js" defer></script>
+    <script type="module" src="src/projectCreation.js" defer></script>
     <script type="module" src="src/UI.js"></script>
+    <script type="module" src="src/taskCreation.js"></script>
   </head>
   <body>
     <header>
@@ -40,7 +41,7 @@
       </aside>
       <section class="dashboard">
         <button class="Create-task">+Create task</button>
-        <dialog class="Create-task-dialog">
+        <dialog class="Create-task-dialog" data-task-dialog>
           <form>
             <span class = "close-task-dialog">&#10005</span>
             <label for="name">Task description:</label>
@@ -50,12 +51,20 @@
             <button type="submit">Submit</button>
           </form>
         </dialog>
+        <section data-task-container></section>
       </section>
       <template id="project">
         <div id = "projectBox"data-project-box>
           <h2 data-title></h2>
         </div>
       </template>
+      <template id="task">
+        <div id="task" data-task-box>
+          <h2 data-task-title></h2>
+          <p data-task-dueDate></p>
+        </div>
+      </template>
+      
     </main>
   </body>
 </html>

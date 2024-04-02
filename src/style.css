@@ -131,6 +131,27 @@ span {
   background-color: var(--secondary-dark);
   color: var(--secondary-light);
 }
+#task {
+  cursor: pointer;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+#task h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+#task p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--secondary-dark);
+}
 #selected {
   background-color: var(--secondary-dark);
   color: var(--primary-light);
