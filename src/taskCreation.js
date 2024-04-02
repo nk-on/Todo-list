@@ -11,7 +11,10 @@ const addTaskForm = document.querySelector('[data-task-dialog]');
 const taskTemplate = document.querySelector('#task');
 const taskContainer = document.querySelector('[data-task-container]');
 const homeButton = document.querySelector('[data-home-button] ');
-const taskArray = [];
+const taskArray = JSON.parse(localStorage.getItem('tasks')) || [];
+function saveTasks(){
+    localStorage.setItem('tasks',JSON.stringify(taskArray));
+}
 function renderTaskArray(tasks) {
   if (taskContainer.innerHTML.length) {
     taskContainer.innerHTML = '';
@@ -31,10 +34,12 @@ function createTaskArray() {
   const task = createTask();
   if (selectedProject) {
     selectedProject.tasks.push(task);
+    saveProject();
     renderTaskArray(selectedProject.tasks);
     return;
   }
   taskArray.push(task);
+  saveTasks();
   renderTaskArray(taskArray);
 }
 addTaskForm.addEventListener('submit', (event) => {
@@ -44,3 +49,4 @@ addTaskForm.addEventListener('submit', (event) => {
 homeButton.addEventListener('click', () => {
     renderTaskArray(taskArray);
 });
+renderTaskArray(taskArray);
