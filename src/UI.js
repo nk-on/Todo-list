@@ -1,4 +1,4 @@
-const createTaskDialog = document.querySelector('.Create-task-dialog');
+const createTaskDialog = document.querySelector('[data-task-dialog]');
 const createProjectDialog = document.querySelector('.Create-project-dialog');
 const closeTaskDialogButton = document.querySelector('.close-task-dialog');
 const closeProjectDialogButton = document.querySelector(
@@ -6,7 +6,7 @@ const closeProjectDialogButton = document.querySelector(
 );
 const submitProjectButton = document.querySelector('[data-submit-project]');
 const addProjectButton = document.querySelector('[data-create-project]');
-const createTaskButton = document.querySelector('.Create-task');
+const createTaskButton = document.querySelector('[data-create-task]');
 const editProjectDialog = document.querySelector('.edit-project-dialog');
 const closeEditProjectDialog = document.querySelector(
   '.close-edit-project-dialog'

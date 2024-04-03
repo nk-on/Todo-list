@@ -40,7 +40,11 @@
          <section data-project-container></section>
       </aside>
       <section class="dashboard">
-        <button class="Create-task">+Create task</button>
+        <div class="buttons">
+          <button data-create-task>+ Add task</button>
+          <button  data-edit-task>Edit task</button>
+          <button  data-delete-task>Delete task</button>
+        </div>
         <dialog class="Create-task-dialog" data-task-dialog>
           <form>
             <span class = "close-task-dialog">&#10005</span>
@@ -49,6 +53,16 @@
             <label for="message">Due date:</label>
             <input type="date" id="date" name="name" required />
             <button type="submit">Submit</button>
+          </form>
+        </dialog>
+        <dialog class="Edit-task-dialog" data-editTask-dialog>
+          <form>
+            <span class = "close-task-dialog">&#10005</span>
+            <label for="name">Task description:</label>
+            <input type="text" id="edited-task-description" name="name" required />
+            <label for="message">Due date:</label>
+            <input type="date" id="edited-date" name="name" required />
+            <button type="submit">Edit</button>
           </form>
         </dialog>
         <section data-task-container></section>

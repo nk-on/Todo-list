@@ -12,9 +12,31 @@ const addTaskForm = document.querySelector('[data-task-dialog]');
 const taskTemplate = document.querySelector('#task');
 const taskContainer = document.querySelector('[data-task-container]');
 const homeButton = document.querySelector('[data-home-button] ');
+const deleteTaskButton = document.querySelector('[data-delete-task]');
+const editTaskButton = document.querySelector('[data-edit-task]');
+const editedTaskDescription = document.querySelector(
+  '#edited-task-description'
+);
+const editedDate = document.querySelector('#edited-date');
 const taskArray = JSON.parse(localStorage.getItem('tasks')) || [];
+let selectedTask;
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(taskArray));
+}
+function getSelectedTask(taskDiv) {
+  if (selectedProject) {
+    return selectedProject.tasks.find((task) => 
+      task.id === Number(taskDiv.className)
+    );
+  }
+  return taskArray.find((task) => 
+    task.id === Number(taskDiv.className)
+  );
+}
+function deleteTask() {
+  //if there is selected project filter selectedproject array
+  //otherwise filter general task array
+  //rendertaskarry
 }
 function renderTaskArray(tasks) {
   if (taskContainer.innerHTML.length) {
@@ -29,6 +51,12 @@ function renderTaskArray(tasks) {
     taskDueDate.textContent = task.dueDate;
     taskContainer.appendChild(taskElement);
     taskDiv.classList.add(String(task.id));
+  });
+  const taskDivs = document.querySelectorAll('[data-task-box]');
+  taskDivs.forEach((taskDiv) => {
+    taskDiv.addEventListener('click', () => {
+      selectedTask = getSelectedTask(taskDiv);
+    });
   });
 }
 function createTaskArray() {
