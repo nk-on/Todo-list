@@ -18,25 +18,29 @@ const editedTaskDescription = document.querySelector(
   '#edited-task-description'
 );
 const editedDate = document.querySelector('#edited-date');
-const taskArray = JSON.parse(localStorage.getItem('tasks')) || [];
+let taskArray = JSON.parse(localStorage.getItem('tasks')) || [];
 let selectedTask;
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(taskArray));
 }
 function getSelectedTask(taskDiv) {
   if (selectedProject) {
-    return selectedProject.tasks.find((task) => 
-      task.id === Number(taskDiv.className)
+    return selectedProject.tasks.find(
+      (task) => task.id === Number(taskDiv.className)
     );
   }
-  return taskArray.find((task) => 
-    task.id === Number(taskDiv.className)
-  );
+  return taskArray.find((task) => task.id === Number(taskDiv.className));
 }
 function deleteTask() {
-  //if there is selected project filter selectedproject array
-  //otherwise filter general task array
-  //rendertaskarry
+  console.log('i work')
+  if (selectedProject) {
+    selectedProject.tasks = selectedProject.tasks.filter((task) => task.id !== selectedTask.id);
+    renderTaskArray(selectedProject.tasks);
+    return;
+  }
+  taskArray = taskArray.filter((task) => task.id !== selectedTask.id);
+  console.log(taskArray)
+  renderTaskArray(taskArray);
 }
 function renderTaskArray(tasks) {
   if (taskContainer.innerHTML.length) {
@@ -83,6 +87,7 @@ addTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   createTaskArray();
 });
+deleteTaskButton.addEventListener('click', deleteTask)
 homeButton.addEventListener('click', () => {
   renderTaskArray(taskArray);
 });
