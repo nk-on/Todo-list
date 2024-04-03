@@ -35,11 +35,13 @@ function deleteTask() {
   console.log('i work')
   if (selectedProject) {
     selectedProject.tasks = selectedProject.tasks.filter((task) => task.id !== selectedTask.id);
+    saveProject();
+    saveTasks();
     renderTaskArray(selectedProject.tasks);
     return;
   }
   taskArray = taskArray.filter((task) => task.id !== selectedTask.id);
-  console.log(taskArray)
+  saveTasks();
   renderTaskArray(taskArray);
 }
 function renderTaskArray(tasks) {
