@@ -13,11 +13,11 @@ const taskTemplate = document.querySelector('#task');
 const taskContainer = document.querySelector('[data-task-container]');
 const homeButton = document.querySelector('[data-home-button] ');
 const deleteTaskButton = document.querySelector('[data-delete-task]');
-const editTaskButton = document.querySelector('[data-edit-task]');
 const editedTaskDescription = document.querySelector(
   '#edited-task-description'
 );
 const editedDate = document.querySelector('#edited-date');
+const editForm = document.querySelector('[data-edit-task-form]')
 let taskArray = JSON.parse(localStorage.getItem('tasks')) || [];
 let selectedTask;
 function saveTasks() {
@@ -31,10 +31,35 @@ function getSelectedTask(taskDiv) {
   }
   return taskArray.find((task) => task.id === Number(taskDiv.className));
 }
-function deleteTask() {
-  console.log('i work')
+function editTaskData(task) {
+  console.log(selectedTask)
+  if (selectedTask.id === task.id) {
+    task.title = editedTaskDescription.value;
+    task.dueDate = editedDate.value;
+  }
+}
+function editTask() {
+  if(!selectedTask){
+    return;
+  }
   if (selectedProject) {
-    selectedProject.tasks = selectedProject.tasks.filter((task) => task.id !== selectedTask.id);
+    selectedProject.tasks.forEach(editTaskData);
+    renderTaskArray(selectedProject.tasks)
+    saveTasks();
+    return;
+  }
+  taskArray.forEach(editTaskData);
+  saveTasks();
+  renderTaskArray(taskArray);
+}
+function deleteTask() {
+  if (!selectedTask) {
+    return;
+  }
+  if (selectedProject) {
+    selectedProject.tasks = selectedProject.tasks.filter(
+      (task) => task.id !== selectedTask.id
+    );
     saveProject();
     saveTasks();
     renderTaskArray(selectedProject.tasks);
@@ -77,7 +102,6 @@ function createTaskArray() {
   saveTasks();
   renderTaskArray(taskArray);
 }
-console.log(projectContainer.children);
 projectContainer.childNodes.forEach((project) => {
   project.addEventListener('click', () => {
     if (String(selectedProject.id) === project.className) {
@@ -89,7 +113,11 @@ addTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   createTaskArray();
 });
-deleteTaskButton.addEventListener('click', deleteTask)
+editForm.addEventListener('submit', (event)=>{
+  event.preventDefault();
+  editTask();
+})
+deleteTaskButton.addEventListener('click', deleteTask);
 homeButton.addEventListener('click', () => {
   renderTaskArray(taskArray);
 });

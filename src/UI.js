@@ -12,6 +12,9 @@ const closeEditProjectDialog = document.querySelector(
   '.close-edit-project-dialog'
 );
 const editProjectButton = document.querySelector('[data-edit-project]');
+const editTaskDialog = document.querySelector('[ data-editTask-dialog]');
+const editTaskButton = document.querySelector('[data-edit-task]');
+const closeEditTask = document.querySelector('.close-edit-task-dialog');
 function showCreateTaskDialog() {
   createTaskDialog.showModal();
 }
@@ -30,9 +33,17 @@ function showEditProjectDialog() {
 function closeEditProject() {
   editProjectDialog.close();
 }
+function showEditTaskDialog() {
+  editTaskDialog.showModal();
+}
+function closeEditTaskDialog() {
+  editTaskDialog.close();
+}
 createTaskButton.addEventListener('click', showCreateTaskDialog);
 closeTaskDialogButton.addEventListener('click', closeCreateTaskDialog);
 addProjectButton.addEventListener('click', showCreateProjectDialog);
 closeProjectDialogButton.addEventListener('click', closeCreateProjectDialog);
 editProjectButton.addEventListener('click', showEditProjectDialog);
-closeEditProjectDialog.addEventListener('click', closeEditProject)
+closeEditProjectDialog.addEventListener('click', closeEditProject);
+editTaskButton.addEventListener('click', showEditTaskDialog);
+closeEditTask.addEventListener('click', closeEditTaskDialog);
