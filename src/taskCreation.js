@@ -4,10 +4,8 @@ import {
   saveProject,
   projectContainer,
 } from './projectCreation.js';
-//app should be able to dsiplay tasks from default task array
-//when user clicks on specific selected project it should display its subtasks
-//when user click on home button it should display general task array
 import { createTask } from './logic.js';
+import { closeCreateTaskDialog } from './UI.js';
 const addTaskForm = document.querySelector('[data-task-dialog]');
 const taskTemplate = document.querySelector('#task');
 const taskContainer = document.querySelector('[data-task-container]');
@@ -17,7 +15,7 @@ const editedTaskDescription = document.querySelector(
   '#edited-task-description'
 );
 const editedDate = document.querySelector('#edited-date');
-const editForm = document.querySelector('[data-edit-task-form]')
+const editForm = document.querySelector('[data-edit-task-form]');
 let taskArray = JSON.parse(localStorage.getItem('tasks')) || [];
 let selectedTask;
 function saveTasks() {
@@ -32,19 +30,19 @@ function getSelectedTask(taskDiv) {
   return taskArray.find((task) => task.id === Number(taskDiv.className));
 }
 function editTaskData(task) {
-  console.log(selectedTask)
+  console.log(selectedTask);
   if (selectedTask.id === task.id) {
     task.title = editedTaskDescription.value;
     task.dueDate = editedDate.value;
   }
 }
 function editTask() {
-  if(!selectedTask){
+  if (!selectedTask) {
     return;
   }
   if (selectedProject) {
     selectedProject.tasks.forEach(editTaskData);
-    renderTaskArray(selectedProject.tasks)
+    renderTaskArray(selectedProject.tasks);
     saveTasks();
     return;
   }
@@ -112,11 +110,13 @@ projectContainer.childNodes.forEach((project) => {
 addTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   createTaskArray();
+  closeCreateTaskDialog();
 });
-editForm.addEventListener('submit', (event)=>{
+editForm.addEventListener('submit', (event) => {
   event.preventDefault();
   editTask();
-})
+  closeCreateTaskDialog();
+});
 deleteTaskButton.addEventListener('click', deleteTask);
 homeButton.addEventListener('click', () => {
   renderTaskArray(taskArray);

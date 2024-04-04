@@ -47,3 +47,4 @@ editProjectButton.addEventListener('click', showEditProjectDialog);
 closeEditProjectDialog.addEventListener('click', closeEditProject);
 editTaskButton.addEventListener('click', showEditTaskDialog);
 closeEditTask.addEventListener('click', closeEditTaskDialog);
+export {closeCreateTaskDialog, closeCreateProjectDialog, closeEditProject}
