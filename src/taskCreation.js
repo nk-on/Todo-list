@@ -1,11 +1,9 @@
 import {
-  projectArray,
   selectedProject,
   saveProject,
-  projectContainer,
 } from './projectCreation.js';
 import { createTask } from './logic.js';
-import { closeCreateTaskDialog } from './UI.js';
+import { closeCreateTaskDialog,projectContainer } from './UI.js';
 const addTaskForm = document.querySelector('[data-task-dialog]');
 const taskTemplate = document.querySelector('#task');
 const taskContainer = document.querySelector('[data-task-container]');

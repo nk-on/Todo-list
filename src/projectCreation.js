@@ -1,4 +1,4 @@
-import { closeCreateProjectDialog, closeEditProject } from './UI.js';
+import { closeCreateProjectDialog, closeEditProject, projectContainer } from './UI.js';
 import { createProject } from './logic.js';
 
 const deleteProjectButton = document.querySelector('[data-delete-project]');
@@ -6,7 +6,6 @@ const submitEditProject = document.querySelector('[data-submit-editedProject]');
 const projectForm = document.querySelector('[data-project-form]');
 const templateProject = document.querySelector('#project');
 const editProjectForm = document.querySelector('[ data-edit-project]');
-const projectContainer = document.querySelector('[data-project-container]');
 const editProjectInput = document.querySelector('#edited-project-description');
 let projectArray = JSON.parse(localStorage.getItem('projects')) || [];
 let selectedProject;
@@ -81,4 +80,4 @@ editProjectForm.addEventListener('submit', (event) => {
 deleteProjectButton.addEventListener('click', deleteProject);
 submitEditProject.addEventListener('click', editProject);
 createProjectBoxes();
-export { selectedProject, saveProject, projectArray, projectContainer };
+export { selectedProject, saveProject, projectArray };

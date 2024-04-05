@@ -4,7 +4,6 @@ const closeTaskDialogButton = document.querySelector('.close-task-dialog');
 const closeProjectDialogButton = document.querySelector(
   '.close-project-dialog'
 );
-const submitProjectButton = document.querySelector('[data-submit-project]');
 const addProjectButton = document.querySelector('[data-create-project]');
 const createTaskButton = document.querySelector('[data-create-task]');
 const editProjectDialog = document.querySelector('.edit-project-dialog');
@@ -15,6 +14,10 @@ const editProjectButton = document.querySelector('[data-edit-project]');
 const editTaskDialog = document.querySelector('[ data-editTask-dialog]');
 const editTaskButton = document.querySelector('[data-edit-task]');
 const closeEditTask = document.querySelector('.close-edit-task-dialog');
+const projectContainer = document.querySelector('[data-project-container]');
+console.log(projectContainer)
+const projectDivs = projectContainer.childNodes;
+console.log(projectDivs)
 function showCreateTaskDialog() {
   createTaskDialog.showModal();
 }
@@ -47,4 +50,9 @@ editProjectButton.addEventListener('click', showEditProjectDialog);
 closeEditProjectDialog.addEventListener('click', closeEditProject);
 editTaskButton.addEventListener('click', showEditTaskDialog);
 closeEditTask.addEventListener('click', closeEditTaskDialog);
-export {closeCreateTaskDialog, closeCreateProjectDialog, closeEditProject}
+export {
+  closeCreateTaskDialog,
+  closeCreateProjectDialog,
+  closeEditProject,
+  projectContainer,
+};

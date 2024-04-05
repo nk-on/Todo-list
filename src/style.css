@@ -156,3 +156,7 @@ span {
   background-color: var(--secondary-dark);
   color: var(--primary-light);
 }
+#projectBox:hover , #task:hover{
+  background-color: var(--primary-dark);
+  color: var(--secondary-light);
+}
