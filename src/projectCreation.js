@@ -44,11 +44,9 @@ function editProject(event) {
   projectArray.forEach((project) => {
     if (project.id === selectedProject.id) {
       // eslint-disable-next-line no-param-reassign
-      console.log(editProjectInput.value);
       project.title = editProjectInput.value;
     }
   });
-  console.log(projectArray);
   saveProject();
   createProjectBoxes();
 }
