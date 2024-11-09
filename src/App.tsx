@@ -1,11 +1,8 @@
-import { useState } from 'react'
-import './App.css'
-
+import "./App.css";
+import Background from "./components/background/Background";
 function App() {
-  return (
-    <>
-    </>
-  )
+  return <>
+    <Background />
+  </>;
 }
-
-export default App
+export default App;
